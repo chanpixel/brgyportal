@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barangay Services</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Your own styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen">
+
+  <!-- Navigation -->
+  <nav class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <div class="flex-shrink-0 flex items-center">
+            <i class="fas fa-home text-primary-600 dark:text-primary-400 text-2xl mr-2"></i>
+            <span class="text-xl font-bold text-gray-800 dark:text-white">Barangay Portal</span>
+          </div>
+        </div>
+        <div class="hidden md:ml-6 md:flex md:items-center md:space-x-4">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="services.html" class="nav-link">Services</a>
+          <a href="documents.html" class="nav-link">Documents</a>
+          <a href="announcements.html" class="nav-link">Announcements</a>
+          <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Barangay Services</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Template per service -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-file-alt text-blue-500 text-2xl mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Barangay Clearance</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Request a barangay clearance for various purposes like business permits, employment, etc.</p>
+        <a href="requestservice.html?service=barangay-clearance"
+           class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm font-medium transition">
+          Request Service <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <!-- Business Permit -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-briefcase text-green-500 text-2xl mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Business Permit</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Apply for or renew your barangay business permit for local establishments.</p>
+        <a href="requestservice.html?service=business-permit"
+           class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm font-medium transition">
+          Request Service <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <!-- Residency Certificate -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-home text-purple-500 text-2xl mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Residency Certificate</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Obtain a certificate proving your residency within the barangay.</p>
+        <a href="requestservice.html?service=residency-certificate"
+           class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm font-medium transition">
+          Request Service <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <!-- Indigency Certificate -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-hands-helping text-yellow-500 text-2xl mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Indigency Certificate</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Request a certificate for availing government assistance programs.</p>
+        <a href="requestservice.html?service=indigency-certificate"
+           class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm font-medium transition">
+          Request Service <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <!-- Complaint Submission -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-comment-alt text-red-500 text-2xl mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Complaint Submission</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">File complaints or reports regarding barangay concerns or incidents.</p>
+        <a href="requestservice.html?service=complaint-submission"
+           class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm font-medium transition">
+          Request Service <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+      <!-- Health Services -->
+      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+        <div class="flex items-center mb-4">
+          <i class="fas fa-medkit text-pink-500 text-2xl mr-3"></i>
+          <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Health Services</h3>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 mb-4">Access barangay health services including medical check-ups and vaccinations.</p>
+        <a href="requestservice.html?service=health-services"
+           class="text-blue-600 hover:text-blue-800 dark:hover:text-blue-400 text-sm font-medium transition">
+          Request Service <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>

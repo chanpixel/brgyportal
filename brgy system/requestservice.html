@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Request Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-6">
+  <div class="bg-white shadow-md rounded-lg max-w-xl w-full p-6">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4">Request Service</h1>
+
+    <!-- Display Selected Service -->
+    <p class="mb-4 text-gray-700">
+      You are requesting:
+      <span id="requestedService" class="font-semibold text-blue-600"></span>
+    </p>
+
+    <!-- Purpose Input -->
+    <label for="purpose" class="block mb-2 text-gray-700 font-medium">What is the purpose?</label>
+    <input
+      type="text"
+      id="purpose"
+      placeholder="e.g. for work, for school"
+      class="w-full p-2 border border-gray-300 rounded mb-4"
+    />
+
+    <!-- Suggested Documents -->
+    <div
+      id="suggestions"
+      class="hidden mt-4 p-4 bg-blue-50 border-l-4 border-blue-500 rounded mb-6"
+    >
+      <p class="font-semibold text-blue-800 mb-2">Suggested Documents:</p>
+      <ul id="suggestedList" class="list-disc list-inside text-gray-700"></ul>
+    </div>
+
+    <!-- Buttons Container -->
+    <div class="flex justify-between mb-6">
+      <button
+        id="backBtn"
+        class="bg-gray-400 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded"
+      >
+        &larr; Back to Services
+      </button>
+      <button
+        id="exitBtn"
+        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+      >
+        Exit to Home
+      </button>
+    </div>
+
+    <!-- Submit Button -->
+    <button
+      id="submitBtn"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded w-full"
+    >
+      Submit Request
+    </button>
+
+    <!-- Submitted Requests List -->
+    <div id="submittedRequests" class="mt-8">
+      <h2 class="text-xl font-semibold mb-3 text-gray-800">Submitted Requests</h2>
+      <ul id="requestsList" class="list-disc list-inside text-gray-700"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Get DOM elements
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get("service") || "";
+    const formattedService = serviceParam
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+    const requestedServiceEl = document.getElementById("requestedService");
+    const purposeInput = document.getElementById("purpose");
+    const suggestionsDiv = document.getElementById("suggestions");
+    const suggestedList = document.getElementById("suggestedList");
+    const submitBtn = document.getElementById("submitBtn");
+    const requestsList = document.getElementById("requestsList");
+    const backBtn = document.getElementById("backBtn");
+    const exitBtn = document.getElementById("exitBtn");
+
+    // Display selected service
+    requestedServiceEl.textContent = formattedService || "Unknown Service";
+
+    // Recommendations based on purpose keywords
+    const recommendations = {
+      work: ["Barangay Clearance", "Business Permit"],
+      school: ["Certificate of Indigency", "Residency Certificate"],
+      travel: ["Travel Certificate", "Barangay Clearance"],
+    };
+
+    // Show suggestions on input
+    purposeInput.addEventListener("input", () => {
+      const input = purposeInput.value.toLowerCase();
+      suggestedList.innerHTML = "";
+      suggestionsDiv.classList.add("hidden");
+
+      for (const keyword in recommendations) {
+        if (input.includes(keyword)) {
+          const docs = recommendations[keyword];
+          docs.forEach((doc) => {
+            const li = document.createElement("li");
+            li.textContent = doc;
+            suggestedList.appendChild(li);
+          });
+          suggestionsDiv.classList.remove("hidden");
+          break;
+        }
+      }
+    });
+
+    // Load saved requests from localStorage
+    let savedRequests = JSON.parse(localStorage.getItem("barangayRequests")) || [];
+
+    // Function to render the list of submitted requests
+    function renderRequests() {
+      requestsList.innerHTML = "";
+      if (savedRequests.length === 0) {
+        requestsList.innerHTML = "<li>No requests submitted yet.</li>";
+        return;
+      }
+      savedRequests.forEach(({ service, purpose }, index) => {
+        const li = document.createElement("li");
+        li.textContent = `${service} - Purpose: ${purpose}`;
+        requestsList.appendChild(li);
+      });
+    }
+
+    // Render on page load
+    renderRequests();
+
+    // Handle submit button click
+    submitBtn.addEventListener("click", () => {
+      const purposeVal = purposeInput.value.trim();
+      if (!purposeVal) {
+        alert("Please enter the purpose of your request.");
+        return;
+      }
+
+      // Add new request to array
+      savedRequests.push({
+        service: formattedService || "Unknown Service",
+        purpose: purposeVal,
+      });
+
+      // Save to localStorage
+      localStorage.setItem("barangayRequests", JSON.stringify(savedRequests));
+
+      // Clear input and suggestions
+      purposeInput.value = "";
+      suggestedList.innerHTML = "";
+      suggestionsDiv.classList.add("hidden");
+
+      // Re-render list
+      renderRequests();
+    });
+
+    // Back button: go to services page
+    backBtn.addEventListener("click", () => {
+      window.location.href = "services.html";
+    });
+
+    // Exit button: go to home page
+    exitBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
+</body>
+</html>
